@@ -3,4 +3,117 @@
 
 Welcome to my SQL Analytical Projects repository. This collection contains production-grade PostgreSQL scripts designed to solve complex data modeling, business intelligence, and user analytics problems.
 
+## 📁 Repository Directory
 
+| File Name | Focus Area | Key SQL Techniques |
+| :--- | :--- | :--- |
+| **[icc_world_cup_points_table.sql](./icc_world_cup_points_table.sql)** | Tournament Points Table Calculation | `CROSS JOIN LATERAL`, Unpivoting Data, Conditional Aggregation |
+| **[ipl_toss_and_match_analytics.sql](./ipl_toss_and_match_analytics.sql)** | IPL 2026 Toss & Match Conversion Analytics | CTEs (`WITH`), `CROSS JOIN LATERAL`, Safe Division (`NULLIF`), Percentage Rounding |
+
+---
+
+## 📊 Sample Datasets & DDL Setup
+
+To reproduce these results locally in PostgreSQL, run the following schema creation and insert statements:
+
+### 1. ICC World Cup Table Setup
+```sql
+CREATE TABLE icc_world_cup (
+    team_1 VARCHAR(20),
+    team_2 VARCHAR(20),
+    winner VARCHAR(20)
+);
+
+INSERT INTO icc_world_cup (team_1, team_2, winner) VALUES
+('India', 'SL', 'India'),
+('SL', 'Aus', 'Aus'),
+('SA', 'Eng', 'Eng'),
+('Eng', 'NZ', 'NZ'),
+('Aus', 'India', 'India');
+```
+
+### 2. IPL 2026 dataset setup
+```sql
+CREATE TABLE ipl_2026_matches (
+    team1 VARCHAR(50),
+    team2 VARCHAR(50),
+    winner VARCHAR(50),
+    toss_won_by VARCHAR(50),
+    batting_first VARCHAR(50)
+);
+INSERT INTO ipl_2026_matches (team1, team2, winner, toss_won_by, batting_first) VALUES
+('Sunrisers Hyderabad','Royal Challengers Bengaluru','Royal Challengers Bengaluru','Royal Challengers Bengaluru','Sunrisers Hyderabad'),
+('Kolkata Knight Riders','Mumbai Indians','Mumbai Indians','Mumbai Indians','Kolkata Knight Riders'),
+('Chennai Super Kings','Rajasthan Royals','Rajasthan Royals','Rajasthan Royals','Chennai Super Kings'),
+('Gujarat Titans','Punjab Kings','Punjab Kings','Punjab Kings','Gujarat Titans'),
+('Lucknow Super Giants','Delhi Capitals','Delhi Capitals','Delhi Capitals','Lucknow Super Giants'),
+('Sunrisers Hyderabad','Kolkata Knight Riders','Sunrisers Hyderabad','Kolkata Knight Riders','Sunrisers Hyderabad'),
+('Chennai Super Kings','Punjab Kings','Punjab Kings','Punjab Kings','Chennai Super Kings'),
+('Mumbai Indians','Delhi Capitals','Delhi Capitals','Delhi Capitals','Mumbai Indians'),
+('Rajasthan Royals','Gujarat Titans','Rajasthan Royals','Rajasthan Royals','Rajasthan Royals'),
+('Royal Challengers Bengaluru','Chennai Super Kings','Royal Challengers Bengaluru','Chennai Super Kings','Royal Challengers Bengaluru'),
+('Sunrisers Hyderabad','Lucknow Super Giants','Lucknow Super Giants','Lucknow Super Giants','Sunrisers Hyderabad'),
+('Kolkata Knight Riders','Punjab Kings','-','Kolkata Knight Riders','Kolkata Knight Riders'),
+('Rajasthan Royals','Mumbai Indians','Rajasthan Royals','Mumbai Indians','Rajasthan Royals'),
+('Gujarat Titans','Delhi Capitals','Gujarat Titans','Delhi Capitals','Gujarat Titans'),
+('Kolkata Knight Riders','Lucknow Super Giants','Lucknow Super Giants','Lucknow Super Giants','Kolkata Knight Riders'),
+('Royal Challengers Bengaluru','Rajasthan Royals','Rajasthan Royals','Rajasthan Royals','Royal Challengers Bengaluru'),
+('Chennai Super Kings','Delhi Capitals','Chennai Super Kings','Delhi Capitals','Chennai Super Kings'),
+('Sunrisers Hyderabad','Punjab Kings','Punjab Kings','Punjab Kings','Sunrisers Hyderabad'),
+('Lucknow Super Giants','Gujarat Titans','Gujarat Titans','Gujarat Titans','Lucknow Super Giants'),
+('Royal Challengers Bengaluru','Mumbai Indians','Royal Challengers Bengaluru','Mumbai Indians','Royal Challengers Bengaluru'),
+('Sunrisers Hyderabad','Rajasthan Royals','Sunrisers Hyderabad','Rajasthan Royals','Sunrisers Hyderabad'),
+('Chennai Super Kings','Kolkata Knight Riders','Chennai Super Kings','Kolkata Knight Riders','Chennai Super Kings'),
+('Lucknow Super Giants','Royal Challengers Bengaluru','Royal Challengers Bengaluru','Royal Challengers Bengaluru','Lucknow Super Giants'),
+('Mumbai Indians','Punjab Kings','Punjab Kings','Punjab Kings','Mumbai Indians'),
+('Kolkata Knight Riders','Gujarat Titans','Gujarat Titans','Kolkata Knight Riders','Kolkata Knight Riders'),
+('Royal Challengers Bengaluru','Delhi Capitals','Delhi Capitals','Delhi Capitals','Royal Challengers Bengaluru'),
+('Sunrisers Hyderabad','Chennai Super Kings','Sunrisers Hyderabad','Chennai Super Kings','Sunrisers Hyderabad'),
+('Punjab Kings','Lucknow Super Giants','Punjab Kings','Lucknow Super Giants','Punjab Kings'),
+('Rajasthan Royals','Kolkata Knight Riders','Kolkata Knight Riders','Rajasthan Royals','Rajasthan Royals'),
+('Mumbai Indians','Gujarat Titans','Mumbai Indians','Gujarat Titans','Mumbai Indians'),
+('Sunrisers Hyderabad','Delhi Capitals','Sunrisers Hyderabad','Delhi Capitals','Sunrisers Hyderabad'),
+('Rajasthan Royals','Lucknow Super Giants','Rajasthan Royals','Lucknow Super Giants','Rajasthan Royals'),
+('Chennai Super Kings','Mumbai Indians','Chennai Super Kings','Mumbai Indians','Chennai Super Kings'),
+('Gujarat Titans','Royal Challengers Bengaluru','Royal Challengers Bengaluru','Royal Challengers Bengaluru','Gujarat Titans'),
+('Delhi Capitals','Punjab Kings','Punjab Kings','Delhi Capitals','Delhi Capitals'),
+('Rajasthan Royals','Sunrisers Hyderabad','Sunrisers Hyderabad','Sunrisers Hyderabad','Rajasthan Royals'),
+('Chennai Super Kings','Gujarat Titans','Gujarat Titans','Gujarat Titans','Chennai Super Kings'),
+('Kolkata Knight Riders','Lucknow Super Giants','-','Lucknow Super Giants','Kolkata Knight Riders'),
+('Delhi Capitals','Royal Challengers Bengaluru','Royal Challengers Bengaluru','Royal Challengers Bengaluru','Delhi Capitals'),
+('Punjab Kings','Rajasthan Royals','Rajasthan Royals','Rajasthan Royals','Punjab Kings'),
+('Mumbai Indians','Sunrisers Hyderabad','Sunrisers Hyderabad','Mumbai Indians','Mumbai Indians'),
+('Royal Challengers Bengaluru','Gujarat Titans','Gujarat Titans','Gujarat Titans','Royal Challengers Bengaluru'),
+('Rajasthan Royals','Delhi Capitals','Delhi Capitals','Rajasthan Royals','Rajasthan Royals'),
+('Mumbai Indians','Chennai Super Kings','Chennai Super Kings','Mumbai Indians','Mumbai Indians'),
+('Punjab Kings','Gujarat Titans','Gujarat Titans','Gujarat Titans','Punjab Kings'),
+('Sunrisers Hyderabad','Kolkata Knight Riders','Kolkata Knight Riders','Sunrisers Hyderabad','Sunrisers Hyderabad'),
+('Lucknow Super Giants','Mumbai Indians','Mumbai Indians','Mumbai Indians','Lucknow Super Giants'),
+('Delhi Capitals','Chennai Super Kings','Chennai Super Kings','Delhi Capitals','Delhi Capitals'),
+('Sunrisers Hyderabad','Punjab Kings','Sunrisers Hyderabad','Punjab Kings','Sunrisers Hyderabad'),
+('Lucknow Super Giants','Royal Challengers Bengaluru','Lucknow Super Giants','Royal Challengers Bengaluru','Lucknow Super Giants'),
+('Delhi Capitals','Kolkata Knight Riders','Kolkata Knight Riders','Kolkata Knight Riders','Delhi Capitals'),
+('Gujarat Titans','Rajasthan Royals','Gujarat Titans','Rajasthan Royals','Gujarat Titans'),
+('Lucknow Super Giants','Chennai Super Kings','Chennai Super Kings','Chennai Super Kings','Lucknow Super Giants'),
+('Mumbai Indians','Royal Challengers Bengaluru','Royal Challengers Bengaluru','Royal Challengers Bengaluru','Mumbai Indians'),
+('Punjab Kings','Delhi Capitals','Delhi Capitals','Delhi Capitals','Punjab Kings'),
+('Gujarat Titans','Sunrisers Hyderabad','Gujarat Titans','Sunrisers Hyderabad','Gujarat Titans'),
+('Kolkata Knight Riders','Royal Challengers Bengaluru','Royal Challengers Bengaluru','Royal Challengers Bengaluru','Kolkata Knight Riders'),
+('Punjab Kings','Mumbai Indians','Mumbai Indians','Mumbai Indians','Punjab Kings'),
+('Chennai Super Kings','Lucknow Super Giants','Lucknow Super Giants','Lucknow Super Giants','Chennai Super Kings'),
+('Kolkata Knight Riders','Gujarat Titans','Kolkata Knight Riders','Gujarat Titans','Kolkata Knight Riders'),
+('Rajasthan Royals','Delhi Capitals','Delhi Capitals','Delhi Capitals','Rajasthan Royals'),
+('Royal Challengers Bengaluru','Punjab Kings','Royal Challengers Bengaluru','Punjab Kings','Royal Challengers Bengaluru'),
+('Chennai Super Kings','Sunrisers Hyderabad','Sunrisers Hyderabad','Chennai Super Kings','Chennai Super Kings'),
+('Lucknow Super Giants','Rajasthan Royals','Rajasthan Royals','Rajasthan Royals','Lucknow Super Giants'),
+('Mumbai Indians','Kolkata Knight Riders','Kolkata Knight Riders','Kolkata Knight Riders','Mumbai Indians'),
+('Gujarat Titans','Chennai Super Kings','Gujarat Titans','Chennai Super Kings','Gujarat Titans'),
+('Sunrisers Hyderabad','Royal Challengers Bengaluru','Sunrisers Hyderabad','Sunrisers Hyderabad','Sunrisers Hyderabad'),
+('Lucknow Super Giants','Punjab Kings','Punjab Kings','Punjab Kings','Lucknow Super Giants'),
+('Delhi Capitals','Kolkata Knight Riders','Delhi Capitals','Kolkata Knight Riders','Delhi Capitals'),
+('Rajasthan Royals','Mumbai Indians','Rajasthan Royals','Mumbai Indians','Rajasthan Royals'),
+('Royal Challengers Bengaluru','Gujarat Titans','Royal Challengers Bengaluru','Gujarat Titans','Royal Challengers Bengaluru'),
+('Rajasthan Royals','Sunrisers Hyderabad','Rajasthan Royals','Sunrisers Hyderabad','Rajasthan Royals'),
+('Rajasthan Royals','Gujarat Titans','Gujarat Titans','Rajasthan Royals','Rajasthan Royals'),
+('Gujarat Titans','Royal Challengers Bengaluru','Royal Challengers Bengaluru','Royal Challengers Bengaluru','Gujarat Titans');
+```
