@@ -1,3 +1,6 @@
+-- Problem Statement: Take a list of cricket match outcomes between teams and dynamically aggregate 
+--them to generate no.of matches played, matches won, and matches lost by the teams 
+
 
 select  t.team_name,
 		count(1) as matches_played,
