@@ -10,7 +10,7 @@ Welcome to my SQL Analytical Projects repository. This collection contains produ
 | **[icc_world_cup_points_table.sql](./icc_world_cup_points_table.sql)** | Tournament Points Table Calculation | `CROSS JOIN LATERAL`, Unpivoting Data, Conditional Aggregation |
 | **[ipl_toss_and_match_analytics.sql](./ipl_toss_and_match_analytics.sql)** | IPL 2026 Toss & Match Conversion Analytics | CTEs (`WITH`), `CROSS JOIN LATERAL`, Safe Division (`NULLIF`), Percentage Rounding |
 | **[customer_orders_new_and_repeat_count.sql](./customer_orders_new_and_repeat_count.sql)** | Daily New vs. Repeat Customer Metrics | CTEs (`WITH`), Subqueries, Conditional Aggregation (`SUM(CASE)`), Self-Joins (`INNER JOIN`) |
-**[entries_floor_and_resources.sql](./entries_floor_and_resources.sql)** | Visitor Floor & Resource Usage AnalysisCTEs (WITH), Window Functions (RANK()), String Aggregation (STRING_AGG), Aggregations (COUNT)
+| **[entries_floor_and_resources.sql](./entries_floor_and_resources.sql)** | Visitor Floor & Resource Usage Analysis | CTEs (`WITH`), Window Functions (`RANK()`), String Aggregation (`STRING_AGG`), Aggregations (`COUNT`) |
 
 ---
 
