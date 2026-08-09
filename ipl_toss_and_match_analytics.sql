@@ -1,4 +1,9 @@
 -- ipl 2026 matches toss, batting first perfromance analysis
+-- Problem Statement: Analyze IPL match data to evaluate toss impact, calculating total matches played, 
+--total toss wins, matches won after winning the toss,
+--and the toss-to-match conversion win percentage for each franchise.
+
+
 with team_data as (
     select  
         t.team_name,
