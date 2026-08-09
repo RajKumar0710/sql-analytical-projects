@@ -9,6 +9,7 @@ Welcome to my SQL Analytical Projects repository. This collection contains produ
 | :--- | :--- | :--- |
 | **[icc_world_cup_points_table.sql](./icc_world_cup_points_table.sql)** | Tournament Points Table Calculation | `CROSS JOIN LATERAL`, Unpivoting Data, Conditional Aggregation |
 | **[ipl_toss_and_match_analytics.sql](./ipl_toss_and_match_analytics.sql)** | IPL 2026 Toss & Match Conversion Analytics | CTEs (`WITH`), `CROSS JOIN LATERAL`, Safe Division (`NULLIF`), Percentage Rounding |
+| **[customer_orders_new_and_repeat_count.sql](./customer_orders_new_and_repeat_count.sql)** | Daily New vs. Repeat Customer Metrics | CTEs (`WITH`), Subqueries, Conditional Aggregation (`SUM(CASE)`), Self-Joins (`INNER JOIN`) |
 
 ---
 
@@ -116,4 +117,29 @@ INSERT INTO ipl_2026_matches (team1, team2, winner, toss_won_by, batting_first) 
 ('Rajasthan Royals','Sunrisers Hyderabad','Rajasthan Royals','Sunrisers Hyderabad','Rajasthan Royals'),
 ('Rajasthan Royals','Gujarat Titans','Gujarat Titans','Rajasthan Royals','Rajasthan Royals'),
 ('Gujarat Titans','Royal Challengers Bengaluru','Royal Challengers Bengaluru','Royal Challengers Bengaluru','Gujarat Titans');
+```
+
+### 3.customer_orders_new_and_repeat_count
+```sql
+
+-- 1. Create the customer_orders table
+CREATE TABLE customer_orders (
+    order_id INT PRIMARY KEY,
+    customer_id INT NOT NULL,
+    order_date DATE NOT NULL,
+    order_amount NUMERIC(10, 2) NOT NULL
+);
+
+-- 2. Insert sample data
+INSERT INTO customer_orders (order_id, customer_id, order_date, order_amount) 
+VALUES
+    (1, 100, '2022-01-01', 2000.00),
+    (2, 200, '2022-01-01', 2500.00),
+    (3, 300, '2022-01-01', 2100.00),
+    (4, 100, '2022-01-02', 2000.00),
+    (5, 400, '2022-01-02', 2200.00),
+    (6, 500, '2022-01-02', 2700.00),
+    (7, 100, '2022-01-03', 3000.00),
+    (8, 400, '2022-01-03', 1000.00),
+    (9, 600, '2022-01-03', 3000.00);
 ```
