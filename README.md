@@ -144,3 +144,26 @@ VALUES
     (8, 400, '2022-01-03', 1000.00),
     (9, 600, '2022-01-03', 3000.00);
 ```
+
+### 4. most visited floor data setup 
+
+```sql
+-- Create table with exact data types from screenshot
+CREATE TABLE entries (
+    name VARCHAR(20),
+    address VARCHAR(20),
+    email VARCHAR(20),
+    floor INT,
+    resources VARCHAR(10)
+);
+
+-- Insert sample data
+INSERT INTO entries (name, address, email, floor, resources) 
+VALUES
+    ('A', 'Bangalore', 'A@gmail.com', 1, 'CPU'),
+    ('A', 'Bangalore', 'A1@gmail.com', 1, 'CPU'),
+    ('A', 'Bangalore', 'A2@gmail.com', 2, 'DESKTOP'),
+    ('B', 'Bangalore', 'B@gmail.com', 2, 'DESKTOP'),
+    ('B', 'Bangalore', 'B1@gmail.com', 2, 'DESKTOP'),
+    ('B', 'Bangalore', 'B2@gmail.com', 1, 'MONITOR');
+```
