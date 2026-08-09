@@ -167,3 +167,8 @@ VALUES
     ('B', 'Bangalore', 'B1@gmail.com', 2, 'DESKTOP'),
     ('B', 'Bangalore', 'B2@gmail.com', 1, 'MONITOR');
 ```
+
+| File Name | Focus Area | Key SQL Techniques |
+| :--- | :--- | :--- |
+| **[script1.sql](./script1.sql)** | Analysis Description | Techniques Used |
+| **[script2.sql](./script2.sql)** | Analysis Description | Techniques Used |
