@@ -1,4 +1,5 @@
-
+--Problem Statement: Track customer purchasing behavior to find the daily count of new customers
+--(placing their very first order) versus repeat customers (placing orders on subsequent dates) for each date available in the dataset.
 
 -- First we calculate the first order date for each customer id and with that as CTE we join customer orders table
 with first_order as 
