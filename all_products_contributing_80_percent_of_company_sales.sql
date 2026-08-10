@@ -1,4 +1,8 @@
--- problem statement: write a query to find all the products that contribute 80 percent of the total sales within a company
+
+--------------------------------------------------------------------
+-- problem statement: write a query to find all the products that contribute 
+--80 percent of the total sales within a company
+
 
 with sales_t as -- calculating the sales by product id using cte
 (
@@ -8,7 +12,7 @@ select  product_id,
 from orders 
 group by product_id
 order by product_sales desc
-), calc_sales as -- calculating the running total of the sales using cte and creating a total_sales column for comparision
+), running_t as -- calculating the running total of the sales using cte and creating a total_sales column for comparision
 (
 select  product_id,
 		product_sales,
@@ -16,12 +20,27 @@ select  product_id,
 		sum(product_sales) over() as total_sales
 
 from sales_t
+group by product_id, product_sales 
+), calc_sales as --- creating the lag so that the row below 0.8*total_sales is not selected and the one above it is selected 
+(                --- if we dont use lag, the row where is 80% will be neglected 
+select  product_id,
+		product_sales,
+		running_total,
+		total_sales,
+		coalesce(lag(running_total) over(order by running_total asc),0) as prev_running_total
 
-group by  product_id, product_sales
+from running_t
 )
 
-select  * -- filtering out all the product_ids where running total is less than the total_sales 
+select  product_id,
+		product_sales,
+		running_total,
+		prev_running_total,
+		total_sales,
+		round(running_total/total_sales *100,2) as percentage
 
 from calc_sales 
 
-where running_total < (0.8* total_sales)
+where prev_running_total < (0.8* total_sales) --- filtering out where the running sales is 80% of the total_sales(using lag)
+
+		
