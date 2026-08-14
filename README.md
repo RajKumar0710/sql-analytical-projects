@@ -215,5 +215,47 @@ INSERT INTO users (users_id, banned, role) VALUES
 (13, 'No', 'driver');
 
 ```
+### 6. players_with_highest_scores_within_the_groups 
+```sql
+
+SQL
+-- 1. Create and populate the 'players' table
+DROP TABLE IF EXISTS players;
+
+CREATE TABLE players (
+    player_id INT PRIMARY KEY,
+    group_id INT NOT NULL
+);
+
+INSERT INTO players (player_id, group_id) VALUES
+    (15, 1),
+    (25, 1),
+    (30, 1),
+    (45, 1),
+    (10, 2),
+    (35, 2),
+    (50, 2),
+    (20, 3),
+    (40, 3);
+
+
+-- 2. Create and populate the 'matches' table
+DROP TABLE IF EXISTS matches;
+
+CREATE TABLE matches (
+    match_id INT PRIMARY KEY,
+    first_player INT NOT NULL,
+    second_player INT NOT NULL,
+    first_score INT NOT NULL,
+    second_score INT NOT NULL
+);
+
+INSERT INTO matches (match_id, first_player, second_player, first_score, second_score) VALUES
+    (1, 15, 45, 3, 0),
+    (2, 30, 25, 1, 2),
+    (3, 30, 15, 2, 0),
+    (4, 40, 20, 5, 2),
+    (5, 35, 50, 1, 1);
+```
 
 
