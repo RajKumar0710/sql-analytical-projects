@@ -13,7 +13,7 @@ Welcome to my SQL Analytical Projects repository. This collection contains produ
 | **[entries_floor_and_resources.sql](./entries_floor_and_resources.sql)** | Visitor Floor & Resource Usage Analysis | CTEs (`WITH`), Window Functions (`RANK()`), String Aggregation (`STRING_AGG`), Aggregations (`COUNT`) |
 | **[all_products_contributing_80_percent_of_company_sales.sql](./all_products_contributing_80_percent_of_company_sales.sql)**|parero principle| CTEs('WITH'), Window Functions ('OVER()'), running totals
 | **[cancelled_trips_and_cancellation_rate.sql](/.cancelled_trips_and_cancellation_rate.sql)**|Trip Cancellation Metrics & Rate Analysis | CTEs (WITH), Double INNER JOIN, Conditional Aggregation (SUM(CASE)), Precision Division (1.0 *) |
-
+| **[tournament_highest_score_per_group.sql](tournament_highest_score_per_group.sql)**| Group Highest Scorer with Tie-Breaking Logic | `WITH` (CTEs), `CROSS JOIN LATERAL`, `VALUES` Unpivoting, `ROW_NUMBER()`, Deterministic Tie-Breaking |
 ---
 
 ## 📊 Sample Datasets & DDL Setup
