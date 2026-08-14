@@ -14,6 +14,7 @@ Welcome to my SQL Analytical Projects repository. This collection contains produ
 | **[all_products_contributing_80_percent_of_company_sales.sql](./all_products_contributing_80_percent_of_company_sales.sql)**|parero principle| CTEs('WITH'), Window Functions ('OVER()'), running totals
 | **[cancelled_trips_and_cancellation_rate.sql](/.cancelled_trips_and_cancellation_rate.sql)**|Trip Cancellation Metrics & Rate Analysis | CTEs (WITH), Double INNER JOIN, Conditional Aggregation (SUM(CASE)), Precision Division (1.0 *) |
 | **[tournament_highest_score_per_group.sql](tournament_highest_score_per_group.sql)**| Group Highest Scorer with Tie-Breaking Logic | `WITH` (CTEs), `CROSS JOIN LATERAL`, `VALUES` Unpivoting, `ROW_NUMBER()`, Deterministic Tie-Breaking |
+|**[persons_friends_and_their_score.sql](persons_friends_and_their_score.sql)**| Aggregated Mutual/Friend Network Scores | `INNER JOIN`, Relational Lookups, `SUM()`, `COUNT()`, `HAVING` / Filtering |
 ---
 
 ## 📊 Sample Datasets & DDL Setup
