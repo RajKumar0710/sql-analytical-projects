@@ -285,6 +285,50 @@ INSERT INTO orders (order_id, product_id, sales) VALUES
     (10, 'PROD_J', 20.00);
 ```
 
+### 8.persons_friends_and_their_score
+
+```sql
+
+-- 1. Create and populate the 'person' table
+DROP TABLE IF EXISTS person;
+
+CREATE TABLE person (
+    person_id INT PRIMARY KEY,
+    name VARCHAR(50) NOT NULL,
+    score INT NOT NULL
+);
+
+INSERT INTO person (person_id, name, score) VALUES
+    (1, 'Alice', 85),
+    (2, 'Bob', 90),
+    (3, 'Charlie', 78),
+    (4, 'David', 92),
+    (5, 'Emma', 88);
+
+
+-- 2. Create and populate the 'friends' table (Relationship Mapping)
+DROP TABLE IF EXISTS friends;
+
+CREATE TABLE friends (
+    person_id INT NOT NULL,
+    friend_id INT NOT NULL,
+    PRIMARY KEY (person_id, friend_id),
+    FOREIGN KEY (person_id) REFERENCES person(person_id),
+    FOREIGN KEY (friend_id) REFERENCES person(person_id)
+);
+
+INSERT INTO friends (person_id, friend_id) VALUES
+    (1, 2),  -- Alice is friends with Bob (90)
+    (1, 3),  -- Alice is friends with Charlie (78)
+    (1, 4),  -- Alice is friends with David (92)
+    (2, 1),  -- Bob is friends with Alice (85)
+    (2, 3),  -- Bob is friends with Charlie (78)
+    (3, 1),  -- Charlie is friends with Alice (85)
+    (4, 1),  -- David is friends with Alice (85)
+    (4, 5),  -- David is friends with Emma (88)
+    (5, 4);  -- Emma is friends with David (92)
+```
+
 
 
 
