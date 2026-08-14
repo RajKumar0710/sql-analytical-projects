@@ -258,4 +258,30 @@ INSERT INTO matches (match_id, first_player, second_player, first_score, second_
     (5, 35, 50, 1, 1);
 ```
 
+### 7.All Products contributing 80 percent of company sales (pareto principle)
+
+```sql
+
+-- Create and populate the 'orders' / 'product_sales' table for Pareto Analysis
+DROP TABLE IF EXISTS orders;
+
+CREATE TABLE orders (
+    order_id INT,
+    product_id VARCHAR(10),
+    sales NUMERIC(10, 2)
+);
+
+INSERT INTO orders (order_id, product_id, sales) VALUES
+    (1, 'PROD_A', 3500.00),
+    (2, 'PROD_B', 2500.00),
+    (3, 'PROD_C', 1500.00),
+    (4, 'PROD_D', 900.00),
+    (5, 'PROD_E', 600.00),
+    (6, 'PROD_F', 400.00),
+    (7, 'PROD_G', 300.00),
+    (8, 'PROD_H', 200.00),
+    (9, 'PROD_I', 80.00),
+    (10, 'PROD_J', 20.00);
+```
+
 
