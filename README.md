@@ -15,6 +15,7 @@ Welcome to my SQL Analytical Projects repository. This collection contains produ
 | **[cancelled_trips_and_cancellation_rate.sql](/.cancelled_trips_and_cancellation_rate.sql)**|Trip Cancellation Metrics & Rate Analysis | CTEs (WITH), Double INNER JOIN, Conditional Aggregation (SUM(CASE)), Precision Division (1.0 *) |
 | **[tournament_highest_score_per_group.sql](tournament_highest_score_per_group.sql)**| Group Highest Scorer with Tie-Breaking Logic | `WITH` (CTEs), `CROSS JOIN LATERAL`, `VALUES` Unpivoting, `ROW_NUMBER()`, Deterministic Tie-Breaking |
 |**[persons_friends_and_their_score.sql](persons_friends_and_their_score.sql)**| Aggregated Mutual/Friend Network Scores | `INNER JOIN`, Relational Lookups, `SUM()`, `COUNT()`, `HAVING` / Filtering |
+|**[second_order_favorite_brand_check.sql](second_order_favorite_brand_check.sql)**| Seller 2nd Sale vs. Favorite Brand Match | CTEs (`WITH`), Window Functions (`ROW_NUMBER()`), Conditional `LEFT JOIN`, Control Flow (`CASE`) |
 ---
 
 ## 📊 Sample Datasets & DDL Setup
