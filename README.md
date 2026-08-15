@@ -333,6 +333,52 @@ INSERT INTO friends (person_id, friend_id) VALUES
     (5, 4);  -- Emma is friends with David (92)
 ```
 
+### 9.Second sold brand equal to favorite brand
+
+```sql
+
+-- 1. Create Tables
+CREATE TABLE users1 (
+    user_id INT PRIMARY KEY,
+    join_date DATE,
+    favorite_brand VARCHAR(50)
+);
+
+CREATE TABLE items1 (
+    item_id INT PRIMARY KEY,
+    item_brand VARCHAR(50)
+);
+
+CREATE TABLE orders1 (
+    order_id INT PRIMARY KEY,
+    order_date DATE,
+    item_id INT REFERENCES items1(item_id),
+    buyer_id INT REFERENCES users1(user_id),
+    seller_id INT REFERENCES users1(user_id)
+);
+
+-- 2. Insert Sample Data
+INSERT INTO users1 (user_id, join_date, favorite_brand) VALUES
+(1, '2019-01-01', 'Lenovo'),
+(2, '2019-02-09', 'Samsung'),
+(3, '2019-01-19', 'LG'),
+(4, '2019-05-21', 'HP');
+
+INSERT INTO items1 (item_id, item_brand) VALUES
+(1, 'Samsung'),
+(2, 'Lenovo'),
+(3, 'LG'),
+(4, 'HP');
+
+INSERT INTO orders1 (order_id, order_date, item_id, buyer_id, seller_id) VALUES
+(1, '2019-08-01', 4, 1, 2),
+(2, '2019-08-02', 2, 1, 3),
+(3, '2019-08-03', 3, 2, 3),
+(4, '2019-08-04', 1, 4, 2),
+(5, '2019-08-04', 1, 3, 4),
+(6, '2019-08-05', 2, 2, 4);
+```
+
 
 
 
